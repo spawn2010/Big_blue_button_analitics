@@ -11,7 +11,8 @@ services:
     ports:
       - 8099:80
     volumes:
-      - ./:/var/www/html
+      - ./public:/var/www/html
+      - ./:/var/www
 
   db:
     container_name: misql
