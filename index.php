@@ -1,14 +1,15 @@
 <?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
 
-phpinfo();
-$dsn = "mysql:host=db;dbname=test_db";
+require __DIR__ . '/vendor/autoload.php';
 
-try {
-    $pdo = new PDO($dsn, 'root', 'root');
-} catch (PDOException $e) {
-    die('Подключение не удалось: ' . $e->getMessage());
-}
+$app = AppFactory::create();
 
-if ($pdo){
-    echo 1;
-}
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("Hello world!");
+    return $response;
+});
+
+$app->run();
