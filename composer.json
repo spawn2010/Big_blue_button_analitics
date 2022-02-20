@@ -11,7 +11,5 @@
     "guzzlehttp/psr7": "dev-master",
     "http-interop/http-factory-guzzle": "dev-master",
     "laminas/laminas-diactoros": "2.9.x-dev"
-
-
   }
 }

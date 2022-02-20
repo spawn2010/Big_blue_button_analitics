@@ -5,17 +5,15 @@ services:
     build:
       context: ./docker
       dockerfile: Dockerfile
-    container_name: php74
+    container_name: web
     depends_on:
       - db
     ports:
       - 8099:80
     volumes:
-      - ./public:/var/www/html
-      - ./:/var/www
+      - ./:/var/www/html
 
   db:
-    container_name: misql
     image: mysql:latest
     environment:
       MYSQL_DATABASE: test_db
