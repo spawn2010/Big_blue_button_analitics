@@ -10,6 +10,8 @@
     "nyholm/psr7-server": "dev-master",
     "guzzlehttp/psr7": "dev-master",
     "http-interop/http-factory-guzzle": "dev-master",
-    "laminas/laminas-diactoros": "2.9.x-dev"
+    "laminas/laminas-diactoros": "2.9.x-dev",
+    "php-di/php-di": "v7.x-dev",
+    "monolog/monolog": "2.x-dev"
   }
 }
