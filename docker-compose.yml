@@ -5,25 +5,26 @@ services:
     build:
       context: ./docker
       dockerfile: Dockerfile
-    container_name: web
+    container_name: TEST
     depends_on:
       - db
     ports:
-      - 8099:80
+      - 8100:80
     volumes:
       - ./:/var/www/html
 
   db:
     image: mysql:latest
+    container_name: TEST_DB
     environment:
-      MYSQL_DATABASE: test_db
+      MYSQL_DATABASE: TEST
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - '6033:3306'
+      - '6100:3306'
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin-bbb
+    container_name: phpmyadmin-TEST
     links:
       - db
     environment:
@@ -32,7 +33,7 @@ services:
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8055:80
+      - 8101:80
 
   composer:
     image: composer/composer

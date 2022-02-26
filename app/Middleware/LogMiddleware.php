@@ -4,6 +4,7 @@ namespace App\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Psr7\Response;
 use Psr\Container\ContainerInterface;
 
@@ -18,9 +19,8 @@ class LogMiddleware
 
     public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler): Response
     {
-        if ($this->container->has('logger'))
-            $this->container->get('logger')->info($request->getUri()->getPath());
-
+        if ($this->container->has(LoggerInterface::class))
+            $this->container->get(LoggerInterface::class)->info($request->getUri()->getPath());
         $response = $handler->handle($request);
 
         return $response;
