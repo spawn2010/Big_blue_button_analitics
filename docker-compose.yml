@@ -5,7 +5,7 @@ services:
     build:
       context: ./docker
       dockerfile: Dockerfile
-    container_name: TEST
+    container_name: BBB_PHP
     depends_on:
       - db
     ports:
@@ -15,16 +15,16 @@ services:
 
   db:
     image: mysql:latest
-    container_name: TEST_DB
+    container_name: BBB_DB
     environment:
-      MYSQL_DATABASE: TEST
+      MYSQL_DATABASE: BBB_DB
       MYSQL_ROOT_PASSWORD: root
     ports:
       - '6100:3306'
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin-TEST
+    container_name: BBB_phpmyadmin
     links:
       - db
     environment:

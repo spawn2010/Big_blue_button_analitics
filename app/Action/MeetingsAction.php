@@ -2,13 +2,12 @@
 
 namespace App\Action;
 
-use App\Domain\Domain;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Src\Template;
 
-class ActionId
+class MeetingsAction
 {
     private ContainerInterface $container;
 
@@ -19,8 +18,7 @@ class ActionId
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $body = $this->container->get(Domain::class)->getBody($args['id']);
-        $tmpl = Template::getTmpl(BASE_DIR.'/templates/templates.php',['body' => $body]);
+        $tmpl = Template::getTmpl(BASE_DIR.'/templates/meetings.php',['body' => 'meetengsInfo']);
         $response->getBody()->write($tmpl);
         return $response;
     }

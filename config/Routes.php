@@ -7,9 +7,12 @@ use Psr\Http\Message\ResponseInterface;
  * @var $app
  */
 
-$app->get('/', function (RequestInterface $request, ResponseInterface $response) {
-    $response->getBody()->write('hello-app');
-    return $response;
-});
+$app->get('/', \App\Action\IndexAction::class);
+
+$app->get('/meeting', \App\Action\MeetingAction::class);
+
+$app->get('/meetings', \App\Action\MeetingsAction::class);
+
+$app->get('/user', \App\Action\UserAction::class);
 
 $app->get('/{id}', \App\Action\ActionId::class);

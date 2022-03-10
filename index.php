@@ -19,7 +19,6 @@ $builder->addDefinitions('config/Container.php');
 $container = $builder->build();
 AppFactory::setContainer($container);
 
-$bbb = $container->get(BigBlueButton::class);
 
 $app = AppFactory::create();
 $app->add(LogMiddleware::class);

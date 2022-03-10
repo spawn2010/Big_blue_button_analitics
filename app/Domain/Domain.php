@@ -2,13 +2,11 @@
 
 namespace App\Domain;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Src\DataBase;
 
 class Domain
 {
-    private $connection;
+    private \PDO $connection;
 
     public function __construct(DataBase $container)
     {

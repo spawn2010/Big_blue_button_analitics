@@ -19,8 +19,8 @@ return
             ],
             'development' => [
                 'adapter' => 'mysql',
-                'host' => 'TEST_DB',
-                'name' => 'TEST',
+                'host' => 'BBB_DB',
+                'name' => 'BBB_DB',
                 'user' => 'root',
                 'pass' => 'root',
                 'port' => '3306',
