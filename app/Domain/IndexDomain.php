@@ -18,4 +18,38 @@ class IndexDomain
 
     }
 
+    public function update()
+    {
+
+    }
+
+    public function attendeeInsert()
+    {
+
+    }
+
+    public function meetingInsert()
+    {
+
+    }
+
+    public function logInsert()
+    {
+
+    }
+    public function attendeeUpdate()
+    {
+
+    }
+
+    public function meetingUpdate()
+    {
+
+    }
+
+    public function logUpdate()
+    {
+
+    }
+
 }

@@ -3,7 +3,6 @@
 namespace App\Action;
 
 use App\Domain\MeetingsDomain;
-use BigBlueButton\BigBlueButton;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

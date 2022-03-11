@@ -2,26 +2,27 @@
 
 namespace Src;
 
-use InvalidArgumentException;
-use PDO;
-use PDOException;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception;
+
 
 class DataBase
 {
-    private PDO $connect;
+    private \Doctrine\DBAL\Connection $connect;
 
-    public function __construct($dsn, $username, $password)
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function __construct($params)
     {
         try {
-            $this->connect = new PDO($dsn, $username, $password);
-            $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->connect->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            throw new InvalidArgumentException($e->getMessage());
+            $this->connect = DriverManager::getConnection($params);
+        } catch (\Exception $e) {
+            throw new Exception($e);
         }
     }
 
-    public function getConnect(): PDO
+    public function getConnect(): \Doctrine\DBAL\Connection
     {
         return $this->connect;
     }

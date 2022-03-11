@@ -15,4 +15,4 @@ $app->get('/meetings', \App\Action\MeetingsAction::class);
 
 $app->get('/user', \App\Action\UserAction::class);
 
-$app->get('/{id}', \App\Action\ActionId::class);
+$app->get('/update', \App\Action\ActionUpdate::class);

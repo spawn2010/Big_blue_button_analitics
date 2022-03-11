@@ -6,9 +6,10 @@ use App\Domain\Domain;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Src\DataBase;
 use Src\Template;
 
-class ActionId
+class ActionUpdate
 {
     private ContainerInterface $container;
 
@@ -19,9 +20,8 @@ class ActionId
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $body = $this->container->get(Domain::class)->getBody($args['id']);
-        $tmpl = Template::getTmpl(BASE_DIR.'/templates/templates.php',['body' => $body]);
-        $response->getBody()->write($tmpl);
+        $body = $this->container->get(DataBase::class)->getConnect();
+        $response->getBody()->write('hello');
         return $response;
     }
 }
