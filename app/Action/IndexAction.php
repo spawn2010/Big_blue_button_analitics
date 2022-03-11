@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Domain\MeetingsDomain;
+use BigBlueButton\BigBlueButton;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,9 +20,8 @@ class IndexAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $bbb = $this->container->get(MeetingsDomain::class);
-        var_dump($bbb->getMeetings());
-        $tmpl = Template::getTmpl(BASE_DIR.'/templates/index.php',['body' => 'Index']);
+        $body = $this->container->get(MeetingsDomain::class)->getMeetings();
+        $tmpl = Template::getTmpl(BASE_DIR.'/templates/index.php',['body' => $body]);
         $response->getBody()->write($tmpl);
         return $response;
     }

@@ -6,11 +6,11 @@ use BigBlueButton\BigBlueButton;
 
 class IndexDomain
 {
-    private BigBlueButton $bbb;
+    private $meetings;
 
     public function __construct(BigBlueButton $container)
     {
-        $this->bbb = $container;
+        $this->meetings = $container->getMeetings()->getMeetings();
     }
 
     public function insert()

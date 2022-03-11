@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class Firs extends AbstractMigration
+final class Users extends AbstractMigration
 {
     /**
      * Change Method.
@@ -16,9 +16,18 @@ final class Firs extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change(): void
+    public function up()
     {
-        $table = $this->table('test');
-        $table->addColumn('info', 'string')->create();
+        $table =  $this->table('users');
+
+        $table->addColumn('fullName','string', array('limit'=>255))
+            ->addColumn('internalId','integer')
+            ->addColumn('role','string', array('limit'=>10))
+            ->create();
+    }
+
+    public function down()
+    {
+        $this->dropTable('users');
     }
 }

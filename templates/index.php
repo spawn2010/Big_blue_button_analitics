@@ -1,2 +1,9 @@
 <?php
-var_dump($body);
+
+
+
+echo '<pre>';
+
+
+print_r($body);
+echo '</pre>';
