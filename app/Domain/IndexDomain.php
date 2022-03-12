@@ -8,22 +8,19 @@ use Src\DataBase;
 class IndexDomain
 {
     private array $meetings;
-    private \Doctrine\DBAL\Query\QueryBuilder $queryBuilder;
-    private $con;
+    private \Doctrine\DBAL\Connection $connect;
 
     public function __construct(BigBlueButton $container,DataBase $connect)
     {
         $this->meetings = $container->getMeetings()->getMeetings();
-        $this->queryBuilder = $connect->getConnect()->createQueryBuilder();
-        $this->con = $connect->getConnect();
-
+        $this->connect = $connect->getConnect();
     }
-
 
     public function refresh()
     {
        foreach ($this->meetings as $meeting){
-           $result = $this->exist($meeting->getInternalMeetingId(),'meetings','internalMeetingID');
+           $result = $this->exist($meeting->getInternalMeetingId(),'meetings','internalMeetingId');
+           $this->attendee($meeting->getAttendees(),$meeting);
            if ($result){
                 $this->meetingUpdate($meeting);
                continue;
@@ -32,19 +29,28 @@ class IndexDomain
        }
     }
 
-
     public function insert($tableName, $arVal, $arParam)
     {
-        $this->queryBuilder
+        $this->connect->createQueryBuilder()
             ->insert($tableName)
             ->values($arVal)
             ->setParameters($arParam)
             ->executeQuery();
     }
 
-    public function attendeeInsert()
+    public function attendeeInsert($attendee)
     {
-
+        $arVal =[
+            'fullName' => '?',
+            'internalId' => '?',
+            'role' => '?',
+        ];
+        $arParam = [
+            0 => $attendee->getFullName(),
+            1 => $attendee->getUserId(),
+            2 => $attendee->getRole(),
+        ];
+        $this->insert('users',$arVal,$arParam);
     }
 
     public function meetingInsert($meeting)
@@ -76,20 +82,9 @@ class IndexDomain
         $this->insert('meetings',$arVal,$arParam);
     }
 
-    public function logInsert()
-    {
-
-    }
-
-    public function attendeeUpdate()
-    {
-
-    }
-
-
     public function meetingUpdate($meeting)
     {
-        $this->con->update('meetings',
+        $this->connect->update('meetings',
             ['running' => $meeting->isRunning(),
                 'duration' => $meeting->getDuration(),
                 'endTime' => $meeting->getEndTime(),
@@ -97,19 +92,41 @@ class IndexDomain
             ['internalMeetingId' => $meeting->getInternalMeetingId()]);
     }
 
-    public function logUpdate()
-    {
-
-    }
-
-
     public function exist($value, $tableName,$param)
     {
-        return $this->queryBuilder
+        return $this->connect->createQueryBuilder()
             ->select('*')
             ->from($tableName)
             ->where("$param = ?")
-            ->setParameter(0,$value)->fetchAllAssociative();
+            ->setParameter(0,$value)->fetchAllNumeric();
+    }
+
+    private function attendee($attendees,$meeting)
+    {
+        foreach ($attendees as $attendee){
+            $attendeeExist = $this->exist($attendee->getUserId(),'users','internalId');
+            $logExist =  $this->exist($attendee->getUserId(),'logs','userId');
+            if (!$attendeeExist){
+                $this->attendeeInsert($attendee);
+            }
+            if (!$logExist){
+                $this->logInsert($attendee->getUserId(),$meeting->getInternalMeetingId());
+            }
+
+        }
+    }
+
+    private function logInsert($userId,$meetingId)
+    {
+        $arVal =[
+            'userId' => '?',
+            'meetingId' => '?'
+        ];
+        $arParam = [
+            0 => $userId,
+            1 => $meetingId
+        ];
+        $this->insert('logs',$arVal,$arParam);
     }
 
 }

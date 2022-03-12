@@ -21,7 +21,7 @@ final class Users extends AbstractMigration
         $table =  $this->table('users');
 
         $table->addColumn('fullName','string', array('limit'=>255))
-            ->addColumn('internalId','integer')
+            ->addColumn('internalId','string')
             ->addColumn('role','string', array('limit'=>10))
             ->create();
     }
