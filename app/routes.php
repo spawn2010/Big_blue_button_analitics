@@ -10,6 +10,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 return function (App $app) {
 
     $app->get('/', \App\Action\IndexAction::class);
+    $app->get('/', \App\Action\RefreshAction::class);
 
     $app->get('/user/{id}', \App\Action\UserAction::class);
 
