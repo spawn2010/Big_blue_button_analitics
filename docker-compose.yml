@@ -1,45 +1,24 @@
-version: '3'
-
-services:
-  web:
-    build:
-      context: ./docker
-      dockerfile: Dockerfile
-    container_name: BBB_PHP
-    depends_on:
-      - db
-    ports:
-      - 8100:80
-    volumes:
-      - ./:/var/www/html
-
-  db:
-    image: mysql:latest
-    container_name: BBB_DB
-    environment:
-      MYSQL_DATABASE: BBB_DB
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - '6100:3306'
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: BBB_phpmyadmin
-    links:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - 8101:80
-
-  composer:
-    image: composer/composer
-    command: update
-    volumes:
-      - ./:/app
+version: '3.7'
 
 volumes:
-  db: { }
+    logs:
+        driver: local
+
+services:
+    slim:
+        image: php:8-alpine
+        working_dir: /var/www
+        command: php -S 0.0.0.0:8080 -t public
+        environment:
+            docker: "true"
+        ports:
+            - 8100:8080
+        volumes:
+            - .:/var/www
+            - logs:/var/www/logs
+
+    composer:
+        image: composer/composer
+        command: update
+        volumes:
+            - ./:/app
