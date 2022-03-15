@@ -40,3 +40,9 @@ services:
         restart: always
         ports:
             - 8101:80
+
+    composer:
+        image: composer/composer
+        command: update
+        volumes:
+            - ./:/app
