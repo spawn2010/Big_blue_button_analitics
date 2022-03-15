@@ -2,17 +2,18 @@
 
 namespace App\Action;
 
+use App\Service\WriteService;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RefreshAction
 {
-    private ContainerInterface $container;
+    //private  $writeService;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(WriteService $writeService)
     {
-        $this->container = $container;
+
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

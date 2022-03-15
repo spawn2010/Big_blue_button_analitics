@@ -5,12 +5,14 @@ declare(strict_types=1);
 use App\Settings\SettingsInterface;
 use BigBlueButton\BigBlueButton;
 use DI\ContainerBuilder;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -31,14 +33,18 @@ return function (ContainerBuilder $containerBuilder) {
         BigBlueButton::class => DI\factory(function () {
             return new BigBlueButton(getenv('API_BASEURL'),getenv('API_SECRET'));
         }),
-        DriverManager::class => DI\factory(function () {
-            return DriverManager::getConnection([
-                'dbname' => getenv('DATABASE_NAME'),
-                'user' => getenv('DATABASE_USERNAME'),
-                'password' => getenv('DATABASE_PASSWORD'),
-                'host' => getenv('DATABASE_HOST'),
-                'driver' => getenv('DATABASE_DRIVER'),
-            ]);
+        Connection::class => DI\factory(function () {
+            try {
+                return DriverManager::getConnection([
+                    'dbname' => getenv('DATABASE_NAME'),
+                    'user' => getenv('DATABASE_USERNAME'),
+                    'password' => getenv('DATABASE_PASSWORD'),
+                    'host' => getenv('DATABASE_HOST'),
+                    'driver' => getenv('DATABASE_DRIVER'),
+                ]);
+            } catch (\Doctrine\DBAL\Exception $e) {
+                throw new \Doctrine\DBAL\Exception((string)$e);
+            }
         }),
     ]);
 
