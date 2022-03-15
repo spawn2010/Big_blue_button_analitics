@@ -30,7 +30,8 @@
         "slim/slim": "^4.9",
         "ext-pdo": "*",
         "bigbluebutton/bigbluebutton-api-php": "~2.0.0",
-        "doctrine/dbal": "4.0.x-dev"
+        "doctrine/dbal": "4.0.x-dev",
+        "devcoder-xyz/php-dotenv": "1.1.1"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^1.0.0",
