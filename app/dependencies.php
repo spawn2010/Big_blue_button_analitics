@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Settings\SettingsInterface;
+use BigBlueButton\BigBlueButton;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -26,5 +27,9 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
+        BigBlueButton::class => DI\factory(function () {
+            return new BigBlueButton(getenv('API_BASEURL'),getenv('API_SECRET'));
+        }),
     ]);
+
 };
