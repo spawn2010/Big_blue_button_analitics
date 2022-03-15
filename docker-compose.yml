@@ -11,8 +11,32 @@ services:
             dockerfile: Dockerfile
         working_dir: /var/www
         command: php -S 0.0.0.0:8080 -t public
+        depends_on:
+            - db
         ports:
             - 8100:8080
         volumes:
             - .:/var/www
             - logs:/var/www/logs
+
+    db:
+        image: mysql:latest
+        container_name: BBB_DB
+        environment:
+            MYSQL_DATABASE: BBB_DB
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - '6100:3306'
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: slim_phpmyadmin
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8101:80
