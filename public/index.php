@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 use App\ResponseEmitter\ResponseEmitter;
 use App\Settings\SettingsInterface;
+use DevCoder\DotEnv;
 use DI\ContainerBuilder;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+(new DotEnv(__DIR__ . '/../local.env'))->load();
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
