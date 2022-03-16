@@ -28,10 +28,8 @@ class Adapter
                 continue;
             }
 
-            // Получаем значение свойства, по умолчанию
             $value = $name;
 
-            // Если есть метод для этого свойства, обращаемся к нему
             $methodName = "get$name";
             if ((method_exists($this->object, $methodName))) {
                 $value = $this->object->$methodName();
