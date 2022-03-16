@@ -17,9 +17,7 @@ class WriteService
     {
         $this->connection = $connection;
         $this->meetings = $meetings->getMeetings()->getMeetings();
-        //        echo '<pre>';
-//    print_r($this->connection->createQueryBuilder()->select('*')->from('users')->fetchAllAssociative());
-//        echo '</pre>';
+
     }
 
     public function refresh()
