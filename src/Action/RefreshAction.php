@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class RefreshAction
 {
-    private  $writeService;
+    private $writeService;
 
     public function __construct(WriteService $writeService)
     {

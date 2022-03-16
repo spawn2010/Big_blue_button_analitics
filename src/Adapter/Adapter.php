@@ -8,13 +8,14 @@ use ReflectionClass;
 class Adapter
 {
     private $object;
-
+    private $entity;
     private array $excludeProperties;
 
-    public function __construct($objectFromApi, $excludeProperties)
+    public function __construct($objectFromApi, $excludeProperties, $entity)
     {
         $this->object = $objectFromApi;
         $this->excludeProperties = $excludeProperties;
+        $this->entity = $entity;
     }
 
     public function toEntity()
@@ -39,6 +40,6 @@ class Adapter
             $attributes[$name] = $value;
         }
 
-        return Meeting::createFromArray($attributes);
+        return $this->entity::createFromArray($attributes);
     }
 }

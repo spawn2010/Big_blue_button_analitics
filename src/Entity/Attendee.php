@@ -13,29 +13,45 @@ class Attendee
 
     }
 
-    public function validate()
+    public function getFullName()
     {
-
+        return $this->fullName;
     }
 
-    public function getUserId()
+    public function setFullName($fullName)
     {
-
+        $this->fullName = $fullName;
     }
 
     public function getInternalId()
     {
+        return $this->internalId;
+    }
 
+    public function setInternalId($internalId)
+    {
+        $this->internalId = $internalId;
     }
 
     public function getRole()
     {
-
+        return $this->role;
     }
 
-    public function toArray()
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
+    public static function createFromArray($attributes): Attendee
     {
 
+        $attendee = new self();
+        $attendee->setFullName($attributes['fullName']);
+        $attendee->setInternalId($attributes['userId']);
+        $attendee->setRole($attributes['role']);
+
+        return $attendee;
     }
 
 }
