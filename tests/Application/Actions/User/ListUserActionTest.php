@@ -32,7 +32,7 @@ class ListUserActionTest extends TestCase
         $request = $this->createRequest('GET', '/users');
         $response = $app->handle($request);
 
-        $payload = (string) $response->getBody();
+        $payload = (string)$response->getBody();
         $expectedPayload = new ActionPayload(200, [$user]);
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);
 

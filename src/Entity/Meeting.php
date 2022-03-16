@@ -17,11 +17,12 @@ class Meeting
     private $endTime;
     private $duration;
     private $maxUsers;
+    private $attendees;
 
 
     public function getMeetingName()
     {
-       return $this->meetingName;
+        return $this->meetingName;
     }
 
     public function setMeetingName($meetingName)
@@ -61,7 +62,7 @@ class Meeting
 
     public function getCreationDate()
     {
-       return $this->creationDate;
+        return $this->creationDate;
     }
 
     public function setCreationDate($creationDate)
@@ -111,7 +112,7 @@ class Meeting
 
     public function getMaxUsers()
     {
-       return $this->maxUsers;
+        return $this->maxUsers;
     }
 
     public function setMaxUsers($maxUsers)
@@ -119,9 +120,19 @@ class Meeting
         $this->maxUsers = $maxUsers;
     }
 
+    public function getAttendees()
+    {
+        return $this->attendees;
+    }
+
+    public function setAttendees($attendees)
+    {
+        $this->attendees = $attendees;
+    }
+
     public static function createFromArray($attributes): Meeting
     {
-;
+
         $meeting = new self();
         $meeting->setMeetingName($attributes['meetingName']);
         $meeting->setMeetingId($attributes['meetingId']);
@@ -133,6 +144,7 @@ class Meeting
         $meeting->setEndTime($attributes['endTime']);
         $meeting->setDuration($attributes['duration']);
         $meeting->setMaxUsers($attributes['maxUsers']);
+        $meeting->setAttendees($attributes['attendees']);
 
         return $meeting;
     }

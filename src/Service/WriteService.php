@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Adapter\AttendeeAdapter;
 use App\Adapter\MeetingAdapter;
 use App\Entity\Meeting;
 use BigBlueButton\BigBlueButton;
@@ -14,15 +15,15 @@ class WriteService
 
     public function __construct(Connection $connection, BigBlueButton $meetings)
     {
-       $this->connection = $connection;
-       $this->meetings = $meetings->getMeetings()->getMeetings()[0];
+        $this->connection = $connection;
+        $this->meetings = $meetings->getMeetings()->getMeetings()[1];
     }
 
     public function refresh()
     {
-
-       $meeting = (new MeetingAdapter($this->meetings))->toEntity();
-
+        $meeting = (new MeetingAdapter($this->meetings))->toEntity();
+        $attendee = (new AttendeeAdapter($meeting->getAttendees()[0]))->toEntity();
+        print_r($attendee);
     }
 
     public function exist()

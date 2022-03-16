@@ -18,10 +18,10 @@ final class CreateLogsTable extends AbstractMigration
      */
     public function up()
     {
-        $table =  $this->table('logs');
+        $table = $this->table('logs');
 
-        $table->addColumn('userId','integer')
-            ->addColumn('meetingId','integer')
+        $table->addColumn('userId', 'integer')
+            ->addColumn('meetingId', 'integer')
             ->create();
     }
 

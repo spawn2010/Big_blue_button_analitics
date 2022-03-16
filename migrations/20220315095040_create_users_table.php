@@ -18,11 +18,11 @@ final class CreateUsersTable extends AbstractMigration
      */
     public function up()
     {
-        $table =  $this->table('users');
+        $table = $this->table('users');
 
-        $table->addColumn('fullName','string', array('limit'=>255))
-            ->addColumn('internalId','string')
-            ->addColumn('role','string', array('limit'=>10))
+        $table->addColumn('fullName', 'string', array('limit' => 255))
+            ->addColumn('internalId', 'string')
+            ->addColumn('role', 'string', array('limit' => 10))
             ->create();
     }
 

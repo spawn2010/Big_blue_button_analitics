@@ -25,7 +25,7 @@ class MeetingQuery
     public function getAll(): array
     {
         $sql = 'select ....';
-        $meetings = $this-db->fetchAllAssociative($sql);
+        $meetings = $this - db->fetchAllAssociative($sql);
 
         return array_map(static function ($meeting) {
             return Meeting::createFromArray($meeting);

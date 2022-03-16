@@ -36,7 +36,7 @@ class ViewUserActionTest extends TestCase
         $request = $this->createRequest('GET', '/users/1');
         $response = $app->handle($request);
 
-        $payload = (string) $response->getBody();
+        $payload = (string)$response->getBody();
         $expectedPayload = new ActionPayload(200, $user);
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);
 
@@ -70,7 +70,7 @@ class ViewUserActionTest extends TestCase
         $request = $this->createRequest('GET', '/users/1');
         $response = $app->handle($request);
 
-        $payload = (string) $response->getBody();
+        $payload = (string)$response->getBody();
         $expectedError = new ActionError(ActionError::RESOURCE_NOT_FOUND, 'The user you requested does not exist.');
         $expectedPayload = new ActionPayload(404, null, $expectedError);
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);

@@ -18,18 +18,18 @@ final class CreateMeetingsTable extends AbstractMigration
      */
     public function up()
     {
-        $table =  $this->table('meetings');
+        $table = $this->table('meetings');
 
-        $table->addColumn('meetingName','string', array('limit'=>255))
-            ->addColumn('meetingId','string', array('limit'=>255))
-            ->addColumn('internalMeetingId','string', array('limit'=>255))
-            ->addColumn('startTime','float')
-            ->addColumn('createDate','string', array('limit'=>255))
-            ->addColumn('running','string', array('limit'=>4))
-            ->addColumn('createTime','float')
-            ->addColumn('endTime','float')
-            ->addColumn('duration','integer')
-            ->addColumn('maxUsers','integer')
+        $table->addColumn('meetingName', 'string', array('limit' => 255))
+            ->addColumn('meetingId', 'string', array('limit' => 255))
+            ->addColumn('internalMeetingId', 'string', array('limit' => 255))
+            ->addColumn('startTime', 'float')
+            ->addColumn('createDate', 'string', array('limit' => 255))
+            ->addColumn('running', 'string', array('limit' => 4))
+            ->addColumn('createTime', 'float')
+            ->addColumn('endTime', 'float')
+            ->addColumn('duration', 'integer')
+            ->addColumn('maxUsers', 'integer')
             ->create();
     }
 
