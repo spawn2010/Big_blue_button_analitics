@@ -33,8 +33,12 @@ class Adapter
 
             // Если есть метод для этого свойства, обращаемся к нему
             $methodName = "get$name";
-            if (method_exists($this->object, $methodName)) {
+            if ((method_exists($this->object, $methodName))) {
                 $value = $this->object->$methodName();
+            }
+
+            if ((method_exists($this->object, $name))) {
+                $value = $this->object->$name();
             }
 
             $attributes[$name] = $value;
