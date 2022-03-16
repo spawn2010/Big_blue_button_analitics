@@ -2,38 +2,26 @@
 
 namespace App\Service;
 
+use App\Adapter\MeetingAdapter;
+use App\Entity\Meeting;
+use BigBlueButton\BigBlueButton;
+use Doctrine\DBAL\Connection;
+
 class WriteService
 {
-    private array $meetings;
-    private $connect;
+    private $meetings;
+    private Connection $connection;
 
-    public function __cunstruct()
+    public function __construct(Connection $connection, BigBlueButton $meetings)
     {
-
+       $this->connection = $connection;
+       $this->meetings = $meetings->getMeetings()->getMeetings()[0];
     }
 
     public function refresh()
     {
 
-    }
-
-    public function meetingInsert()
-    {
-
-    }
-
-    public function meetingUpdate()
-    {
-
-    }
-
-    public function attendeeInsert()
-    {
-
-    }
-
-    public function attendeeUpdate()
-    {
+       $meeting = (new MeetingAdapter($this->meetings))->toEntity();
 
     }
 
