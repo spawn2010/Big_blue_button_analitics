@@ -34,7 +34,7 @@ return
                 'pass' => '',
                 'port' => '3306',
                 'charset' => 'utf8',
-            ]
+            ],
         ],
-        'version_order' => 'creation'
+        'version_order' => 'creation',
     ];
