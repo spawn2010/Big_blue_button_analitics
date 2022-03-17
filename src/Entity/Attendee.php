@@ -8,10 +8,6 @@ class Attendee
     private $internalId;
     private $role;
 
-    public function __cunstruct(array $attendee)
-    {
-
-    }
 
     public function getFullName()
     {
