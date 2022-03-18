@@ -2,18 +2,17 @@
 
 namespace App\Action;
 
-use Psr\Container\ContainerInterface;
+use App\Service\ReadService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Src\Template;
 
 class UserAction
 {
-    private ContainerInterface $container;
+    private ReadService $readService;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ReadService $readService)
     {
-        $this->container = $container;
+        $this->readService = $readService;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

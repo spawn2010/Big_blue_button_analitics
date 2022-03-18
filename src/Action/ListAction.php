@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Domain\MeetingsDomain;
+use App\Service\ReadService;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,11 +11,11 @@ use Src\Template;
 
 class ListAction
 {
-    private ContainerInterface $container;
+    private ReadService $readService;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ReadService $readService)
     {
-        $this->container = $container;
+        $this->readService = $readService;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

@@ -2,38 +2,54 @@
 
 namespace App\Service;
 
+use App\Dao\AttendeeDao;
+use App\Dao\MeetingDao;
+use Doctrine\DBAL\Connection;
+
 class ReadService
 {
-    private $connect;
+    private Connection $connection;
+    private MeetingDao $meetingDao;
+    private AttendeeDao $attendeeDao;
 
-    public function __cunstruct()
+    public function __construct(Connection $connection)
     {
-
+        $this->connection = $connection;
+        $this->meetingDao = new MeetingDao($this->connection);
+        $this->attendeeDao = new AttendeeDao($this->connection);
     }
 
-    public function getMeetingsInfo($param = '')
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function getMeetingsInfo(): array
     {
-
+        return $this->meetingDao->getCollection();
     }
 
-    public function getMeetingInfo()
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function getMeetingInfo($internalMeetingId): array
     {
-
+       return $this->meetingDao->getById($internalMeetingId);
     }
 
-    public function getAttendeeInfo()
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function getAttendeeInfo($internalId): array
     {
-
+        return $this->attendeeDao->getById($internalId);
     }
 
-    public function getAttendeeActivity()
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function getAttendeesInfo(): array
     {
-
+        return $this->attendeeDao->getCollection();
     }
 
-    public function getMiddleDuration($meetingId)
-    {
-
-    }
 
 }
