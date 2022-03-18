@@ -11,7 +11,7 @@ class MeetingDao
     private Connection $connection;
     private $meeting;
 
-    public function __construct(Connection $connection, $meeting)
+    public function __construct(Connection $connection, $meeting = '')
     {
         $this->connection = $connection;
         $this->meeting = $meeting;
@@ -96,7 +96,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function getMeetingCollection(): array
+    public function getCollection(): array
     {
         return $this->connection->createQueryBuilder()
             ->select('*')

@@ -13,7 +13,7 @@ class AttendeeDao
     private Connection $connection;
     private $attendee;
 
-    public function __construct(Connection $connection, $attendee)
+    public function __construct(Connection $connection, $attendee = '')
     {
         $this->connection = $connection;
         $this->attendee = $attendee;
