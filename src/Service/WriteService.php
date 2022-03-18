@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Adapter\AttendeeAdapter;
+use App\Adapter\MeetingAdapter;
 use App\Dao\AttendeeDao;
 use App\Dao\LogDao;
 use App\Dao\MeetingDao;
@@ -26,10 +28,12 @@ class WriteService
     public function refresh()
     {
         foreach ($this->meetings as $meetingFromApi) {
-            $meetingDao = new MeetingDao($this->connection, $meetingFromApi);
+            $meeting = (new MeetingAdapter($meetingFromApi))->toEntity();
+            $meetingDao = new MeetingDao($this->connection, $meeting);
             foreach ($meetingFromApi->getAttendees() as $attendeeFromApi) {
-                $attendeeDao = new AttendeeDao($this->connection, $attendeeFromApi);
-                $logDao = new LogDao($this->connection, $meetingFromApi, $attendeeFromApi);
+                $attendee = (new AttendeeAdapter($attendeeFromApi))->toEntity();
+                $attendeeDao = new AttendeeDao($this->connection, $attendee);
+                $logDao = new LogDao($this->connection, $meeting, $attendee);
                 if (!$attendeeDao->getById($attendeeFromApi->getUserId())) {
                     $attendeeDao->insert();
                 }

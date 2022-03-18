@@ -11,10 +11,10 @@ class MeetingDao
     private Connection $connection;
     private $meeting;
 
-    public function __construct(Connection $connection, $meetingFromApi)
+    public function __construct(Connection $connection, $meeting)
     {
         $this->connection = $connection;
-        $this->meeting = (new MeetingAdapter($meetingFromApi))->toEntity();
+        $this->meeting = $meeting;
     }
 
     /**

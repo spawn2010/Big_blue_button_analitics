@@ -13,11 +13,11 @@ class LogDao
     private $meeting;
     private $attendee;
 
-    public function __construct(Connection $connection, $meetingFromApi, $attendeeFromApi)
+    public function __construct(Connection $connection, $meeting, $attendee)
     {
         $this->connection = $connection;
-        $this->meeting = (new MeetingAdapter($meetingFromApi))->toEntity();
-        $this->attendee = (new AttendeeAdapter($attendeeFromApi))->toEntity();
+        $this->meeting = $meeting;
+        $this->attendee = $attendee;
     }
 
     /**
