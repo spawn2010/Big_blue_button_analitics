@@ -1,4 +1,4 @@
-FROM php:8-alphine
+FROM php:8
 
 RUN apt-get update && apt-get install -y
 
