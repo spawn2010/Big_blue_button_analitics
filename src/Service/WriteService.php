@@ -31,21 +31,29 @@ class WriteService
     public function refresh()
     {
         foreach ($this->meetings as $meetingFromApi) {
+
             $meeting = (new MeetingAdapter($meetingFromApi))->toEntity();
+
             foreach ($meetingFromApi->getAttendees() as $attendeeFromApi) {
+
                 $attendee = (new AttendeeAdapter($attendeeFromApi))->toEntity();
+
                 if (!$this->attendeeDao->getById($attendeeFromApi->getUserId())) {
                     $this->attendeeDao->insert($attendee);
                 }
+
                 if (!$this->logDao->getByMeetingId($meetingFromApi->getInternalMeetingId())) {
                     $this->logDao->insert($attendee,$meeting);
                 }
             }
+
             if ($this->meetingDao->getById($meetingFromApi->getInternalMeetingId())) {
                 $this->meetingDao->update($meeting);
                 continue;
             }
+
             $this->meetingDao->insert($meeting);
         }
     }
 }
+
