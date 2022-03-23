@@ -12,10 +12,10 @@ use Doctrine\DBAL\Connection;
 
 class WriteService
 {
-    private $meetings;
-    private $meetingDao;
-    private $attendeeDao;
-    private $logDao;
+    private array $meetings;
+    private MeetingDao $meetingDao;
+    private AttendeeDao $attendeeDao;
+    private LogDao $logDao;
 
     public function __construct(BigBlueButton $meetings, MeetingDao $meetingDao, AttendeeDao $attendeeDao, LogDao $logDao)
     {
