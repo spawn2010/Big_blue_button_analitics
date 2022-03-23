@@ -2,9 +2,7 @@
 
 namespace App\Dao;
 
-use App\Adapter\AttendeeAdapter;
-use App\Adapter\MeetingAdapter;
-use BigBlueButton\Core\Attendee;
+use App\Entity\Attendee;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
@@ -20,7 +18,7 @@ class AttendeeDao
     /**
      * @throws Exception
      */
-    public function insert($attendee)
+    public function insert(Attendee $attendee): void
     {
         try {
             $this->connection->createQueryBuilder()

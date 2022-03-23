@@ -4,6 +4,8 @@ namespace App\Dao;
 
 use App\Adapter\AttendeeAdapter;
 use App\Adapter\MeetingAdapter;
+use App\Entity\Attendee;
+use App\Entity\Meeting;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
@@ -19,7 +21,7 @@ class LogDao
     /**
      * @throws Exception
      */
-    public function insert($attendee,$meeting)
+    public function insert(Attendee $attendee, Meeting $meeting): void
     {
         try {
             $this->connection->createQueryBuilder()
@@ -38,6 +40,9 @@ class LogDao
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function getByMeetingId($meetingId): array
     {
         return $this->connection->createQueryBuilder()

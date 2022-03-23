@@ -3,6 +3,7 @@
 namespace App\Dao;
 
 use App\Adapter\MeetingAdapter;
+use App\Entity\Meeting;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
@@ -44,7 +45,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function insert($meeting)
+    public function insert(Meeting $meeting): void
     {
         try {
             $this->connection->createQueryBuilder()
