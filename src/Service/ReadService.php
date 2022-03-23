@@ -8,15 +8,13 @@ use Doctrine\DBAL\Connection;
 
 class ReadService
 {
-    private Connection $connection;
     private MeetingDao $meetingDao;
     private AttendeeDao $attendeeDao;
 
-    public function __construct(Connection $connection)
+    public function __construct(MeetingDao $meetingDao, AttendeeDao $attendeeDao)
     {
-        $this->connection = $connection;
-        $this->meetingDao = new MeetingDao($this->connection);
-        $this->attendeeDao = new AttendeeDao($this->connection);
+        $this->meetingDao = $meetingDao;
+        $this->attendeeDao = $attendeeDao;
     }
 
     /**

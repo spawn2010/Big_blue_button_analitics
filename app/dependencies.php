@@ -46,6 +46,10 @@ return function (ContainerBuilder $containerBuilder) {
                 throw new \Doctrine\DBAL\Exception((string)$e);
             }
         }),
+        \App\Dao\MeetingDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
+        \App\Dao\AttendeeDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
+        \App\Dao\LogDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
+
     ]);
 
 };

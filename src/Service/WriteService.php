@@ -13,13 +13,16 @@ use Doctrine\DBAL\Connection;
 class WriteService
 {
     private $meetings;
-    private Connection $connection;
+    private $meetingDao;
+    private $attendeeDao;
+    private $logDao;
 
-    public function __construct(Connection $connection, BigBlueButton $meetings)
+    public function __construct(BigBlueButton $meetings, MeetingDao $meetingDao, AttendeeDao $attendeeDao, LogDao $logDao)
     {
-        $this->connection = $connection;
         $this->meetings = $meetings->getMeetings()->getMeetings();
-
+        $this->meetingDao = $meetingDao;
+        $this->attendeeDao = $attendeeDao;
+        $this->logDao = $logDao;
     }
 
     /**
@@ -29,23 +32,20 @@ class WriteService
     {
         foreach ($this->meetings as $meetingFromApi) {
             $meeting = (new MeetingAdapter($meetingFromApi))->toEntity();
-            $meetingDao = new MeetingDao($this->connection, $meeting);
             foreach ($meetingFromApi->getAttendees() as $attendeeFromApi) {
                 $attendee = (new AttendeeAdapter($attendeeFromApi))->toEntity();
-                $attendeeDao = new AttendeeDao($this->connection, $attendee);
-                $logDao = new LogDao($this->connection, $meeting, $attendee);
-                if (!$attendeeDao->getById($attendeeFromApi->getUserId())) {
-                    $attendeeDao->insert();
+                if (!$this->attendeeDao->getById($attendeeFromApi->getUserId())) {
+                    $this->attendeeDao->insert($attendee);
                 }
-                if (!$logDao->getByMeetingId($meetingFromApi->getInternalMeetingId())) {
-                    $logDao->insert();
+                if (!$this->logDao->getByMeetingId($meetingFromApi->getInternalMeetingId())) {
+                    $this->logDao->insert($attendee,$meeting);
                 }
             }
-            if ($meetingDao->getById($meetingFromApi->getInternalMeetingId())) {
-                $meetingDao->update();
+            if ($this->meetingDao->getById($meetingFromApi->getInternalMeetingId())) {
+                $this->meetingDao->update($meeting);
                 continue;
             }
-            $meetingDao->insert();
+            $this->meetingDao->insert($meeting);
         }
     }
 }
