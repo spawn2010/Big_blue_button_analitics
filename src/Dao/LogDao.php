@@ -10,20 +10,16 @@ use Doctrine\DBAL\Exception;
 class LogDao
 {
     private Connection $connection;
-    private $meeting;
-    private $attendee;
 
-    public function __construct(Connection $connection, $meeting, $attendee)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->meeting = $meeting;
-        $this->attendee = $attendee;
     }
 
     /**
      * @throws Exception
      */
-    public function insert()
+    public function insert($attendee,$meeting)
     {
         try {
             $this->connection->createQueryBuilder()
@@ -33,8 +29,8 @@ class LogDao
                     'meetingId' => '?',
                 ])
                 ->setParameters([
-                    0 => $this->attendee->getInternalId(),
-                    1 => $this->meeting->getInternalMeetingId(),
+                    0 => $attendee->getInternalId(),
+                    1 => $meeting->getInternalMeetingId(),
                 ])
                 ->executeQuery();
         } catch (Exception $e) {

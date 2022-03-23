@@ -9,18 +9,16 @@ use Doctrine\DBAL\Exception;
 class MeetingDao
 {
     private Connection $connection;
-    private $meeting;
 
-    public function __construct(Connection $connection, $meeting = '')
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->meeting = $meeting;
     }
 
     /**
      * @throws Exception
      */
-    public function update()
+    public function update($meeting)
     {
         try {
             $this->connection->createQueryBuilder()
@@ -31,11 +29,11 @@ class MeetingDao
                 ->set('endTime', '?')
                 ->where("internalMeetingId = ?")
                 ->setParameters([
-                    0 => $this->meeting->getRunning(),
-                    1 => $this->meeting->getDuration(),
-                    2 => $this->meeting->getMaxUsers(),
-                    3 => $this->meeting->getEndTime(),
-                    4 => $this->meeting->getInternalMeetingId()
+                    0 => $meeting->getRunning(),
+                    1 => $meeting->getDuration(),
+                    2 => $meeting->getMaxUsers(),
+                    3 => $meeting->getEndTime(),
+                    4 => $meeting->getInternalMeetingId()
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
@@ -46,7 +44,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function insert()
+    public function insert($meeting)
     {
         try {
             $this->connection->createQueryBuilder()
@@ -64,16 +62,16 @@ class MeetingDao
                     'maxUsers' => '?',
                 ])
                 ->setParameters([
-                    0 => $this->meeting->getMeetingName(),
-                    1 => $this->meeting->getMeetingId(),
-                    2 => $this->meeting->getInternalMeetingId(),
-                    3 => $this->meeting->getStartTime(),
-                    4 => $this->meeting->getCreationDate(),
-                    5 => $this->meeting->getRunning(),
-                    6 => $this->meeting->getCreationTime(),
-                    7 => $this->meeting->getEndTime(),
-                    8 => $this->meeting->getDuration(),
-                    9 => $this->meeting->getMaxUsers()
+                    0 => $meeting->getMeetingName(),
+                    1 => $meeting->getMeetingId(),
+                    2 => $meeting->getInternalMeetingId(),
+                    3 => $meeting->getStartTime(),
+                    4 => $meeting->getCreationDate(),
+                    5 => $meeting->getRunning(),
+                    6 => $meeting->getCreationTime(),
+                    7 => $meeting->getEndTime(),
+                    8 => $meeting->getDuration(),
+                    9 => $meeting->getMaxUsers()
                 ])
                 ->executeQuery();
         } catch (Exception $e) {

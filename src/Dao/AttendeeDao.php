@@ -11,18 +11,16 @@ use Doctrine\DBAL\Exception;
 class AttendeeDao
 {
     private Connection $connection;
-    private $attendee;
 
-    public function __construct(Connection $connection, $attendee = '')
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->attendee = $attendee;
     }
 
     /**
      * @throws Exception
      */
-    public function insert()
+    public function insert($attendee)
     {
         try {
             $this->connection->createQueryBuilder()
@@ -33,9 +31,9 @@ class AttendeeDao
                     'role' => '?',
                 ])
                 ->setParameters([
-                    0 => $this->attendee->getFullName(),
-                    1 => $this->attendee->getInternalId(),
-                    2 => $this->attendee->getRole(),
+                    0 => $attendee->getFullName(),
+                    1 => $attendee->getInternalId(),
+                    2 => $attendee->getRole(),
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
