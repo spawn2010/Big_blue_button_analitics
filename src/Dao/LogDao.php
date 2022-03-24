@@ -2,8 +2,6 @@
 
 namespace App\Dao;
 
-use App\Adapter\AttendeeAdapter;
-use App\Adapter\MeetingAdapter;
 use App\Entity\Attendee;
 use App\Entity\Meeting;
 use Doctrine\DBAL\Connection;
@@ -43,13 +41,25 @@ class LogDao
     /**
      * @throws Exception
      */
-    public function getByMeetingId($meetingId): array
+    public function getByInternalMeetingId($meetingId): array
     {
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('logs')
             ->where("meetingId = ?")
             ->setParameter(0, $meetingId)->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getByUserId($internalUserId): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('logs')
+            ->where("userId = ?")
+            ->setParameter(0, $internalUserId)->fetchAllAssociative();
     }
 
 }

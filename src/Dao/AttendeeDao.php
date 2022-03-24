@@ -42,13 +42,25 @@ class AttendeeDao
     /**
      * @throws Exception
      */
-    public function getById($internalId): array
+    public function getByInternalId($internalId): array|bool
     {
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('users')
             ->where("internalId = ?")
-            ->setParameter(0, $internalId)->fetchAllAssociative();
+            ->setParameter(0, $internalId)->fetchAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getById($id): array|bool
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('users')
+            ->where("id = ?")
+            ->setParameter(0, $id)->fetchAssociative();
     }
 
     /**

@@ -8,7 +8,7 @@ use App\Dao\AttendeeDao;
 use App\Dao\LogDao;
 use App\Dao\MeetingDao;
 use BigBlueButton\BigBlueButton;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 
 class WriteService
 {
@@ -26,9 +26,9 @@ class WriteService
     }
 
     /**
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function refresh()
+    public function refresh(): void
     {
         foreach ($this->meetings as $meetingFromApi) {
 
@@ -38,16 +38,16 @@ class WriteService
 
                 $attendee = (new AttendeeAdapter($attendeeFromApi))->toEntity();
 
-                if (!$this->attendeeDao->getById($attendeeFromApi->getUserId())) {
+                if (!$this->attendeeDao->getByInternalId($attendeeFromApi->getUserId())) {
                     $this->attendeeDao->insert($attendee);
                 }
 
-                if (!$this->logDao->getByMeetingId($meetingFromApi->getInternalMeetingId())) {
+                if (!$this->logDao->getByInternalMeetingId($meetingFromApi->getInternalMeetingId())) {
                     $this->logDao->insert($attendee,$meeting);
                 }
             }
 
-            if ($this->meetingDao->getById($meetingFromApi->getInternalMeetingId())) {
+            if ($this->meetingDao->getByInternalMeetingId($meetingFromApi->getInternalMeetingId())) {
                 $this->meetingDao->update($meeting);
                 continue;
             }

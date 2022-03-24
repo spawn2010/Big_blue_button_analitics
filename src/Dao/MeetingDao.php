@@ -2,7 +2,6 @@
 
 namespace App\Dao;
 
-use App\Adapter\MeetingAdapter;
 use App\Entity\Meeting;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
@@ -19,7 +18,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function update(Meeting $meeting)
+    public function update(Meeting $meeting): void
     {
         try {
             $this->connection->createQueryBuilder()
@@ -83,7 +82,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function getById($internalMeetingId): array
+    public function getByInternalMeetingId($internalMeetingId): array
     {
         return $this->connection->createQueryBuilder()
             ->select('*')
@@ -95,11 +94,35 @@ class MeetingDao
     /**
      * @throws Exception
      */
+    public function getById($id): array|bool
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('meetings')
+            ->where("id = ?")
+            ->setParameter(0, $id)->fetchAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getCollection(): array
     {
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('meetings')
+            ->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getCollectionByParam($params): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('meetings')
+            ->where($params)
             ->fetchAllAssociative();
     }
 }
