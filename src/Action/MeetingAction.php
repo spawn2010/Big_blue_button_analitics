@@ -27,9 +27,7 @@ class MeetingAction
             'meeting' => $meeting,
             'moderator' => $moderator,
         ];
-        echo '<pre>';
-        var_dump($data);
-        echo '</pre>';
+
         $response->getBody()->write('<img src="https://sun9-37.userapi.com/impf/SwgPsjdv9bds0ITqhjwBfLhtYABsLTiYX1MUeg/s9amfU-JbnI.jpg?size=1280x718&quality=96&sign=5bc34071fb36e54ac6f786b77d5cf1bf&type=album" width=50% height=50%>');
         return $response;
     }

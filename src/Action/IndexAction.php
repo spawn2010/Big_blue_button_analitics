@@ -31,9 +31,6 @@ class IndexAction
             'countAttendees' =>  $countAttendees,
             'medianDuration' => $medianDuration
         ];
-        echo '<pre>';
-        var_dump($data);
-        echo '<pre>';
         $response->getBody()->write('<img src="https://sun9-21.userapi.com/impf/y2DXEIn3kevJGSUiPZ_r_BFNbrgmkCgZ_5LewA/yqlhPratQxY.jpg?size=1280x718&quality=96&sign=4346a6b52783a0c84c220dbb8d02846a&type=album" width=50% height=50%>');
         return $response;
     }
