@@ -19,7 +19,7 @@ class MeetingDao
     /**
      * @throws Exception
      */
-    public function update($meeting)
+    public function update(Meeting $meeting)
     {
         try {
             $this->connection->createQueryBuilder()
