@@ -9,14 +9,13 @@ use PHPUnit\Framework\TestCase;
 class AdapterTest extends TestCase
 {
     private Adapter $adapter;
-    private $objectFromApi;
 
     public function setUp(): void
     {
 
         $xml =  simplexml_load_string(file_get_contents(dirname(__DIR__).'/../fixtures/get_meeting_info.xml'));
-        $this->objectFromApi = (new \BigBlueButton\Responses\GetMeetingInfoResponse($xml))->getMeeting();
-        $this->adapter = new Adapter($this->objectFromApi,[],Meeting::class);
+        $objectFromApi = (new \BigBlueButton\Responses\GetMeetingInfoResponse($xml))->getMeeting();
+        $this->adapter = new Adapter($objectFromApi,[],Meeting::class);
     }
 
     public function testToEntity()
