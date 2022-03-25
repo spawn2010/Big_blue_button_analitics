@@ -27,6 +27,65 @@ class ReadService
     /**
      * @throws Exception
      */
+    public function getMeetingsInfoByParam($param)
+    {
+        $meetings = $this->getMeetingsByParam("$param");
+        $countMeetings = count($meetings);
+        $countAttendees = $this->getMaxUsersByMeetingsParam("$param");
+        $medianDuration = $this->getMedianDurationByMeetingsParam("$param order by duration");
+
+        return [
+            'meetings' => $meetings,
+            'countMeetings' => $countMeetings,
+            'countAttendees' => $countAttendees,
+            'medianDuration' => $medianDuration
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAllMeetingsInfo(): array
+    {
+        $data = [];
+        foreach ($this->getMeetings() as $item){
+            $item['moderators'] = $this->getModerators($item['internalMeetingId']);
+            $data[] = $item;
+        }
+        return $data;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getMeetingInfoById($id)
+    {
+        $meeting = $this->getMeetingById($id);
+        $moderators = $this->getModerators($meeting['internalMeetingId']);
+
+        return [
+            'meeting' => $meeting,
+            'moderators' => $moderators,
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAttendeeInfoById($id)
+    {
+        $user = $this->getAttendeeById($id);
+        $meetings = $this->getMeetingsByAttendee($user['internalId']);
+
+        return [
+            'user' => $user,
+            'meetings' => $meetings
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getMeetings(): array
     {
         try {

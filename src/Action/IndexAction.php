@@ -21,16 +21,7 @@ class IndexAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $meetings = $this->readService->getMeetingsByParam('running = 1');
-        $countMeetings = count($meetings);
-        $countAttendees = $this->readService->getMaxUsersByMeetingsParam('running = 1');
-        $medianDuration = $this->readService->getMedianDurationByMeetingsParam('running = 1 order by duration');
-        $data = [
-            'meetings' => $meetings,
-            'countMeetings' => $countMeetings,
-            'countAttendees' =>  $countAttendees,
-            'medianDuration' => $medianDuration
-        ];
+        $data =  $this->readService->getMeetingsInfoByParam('running = 1');
         var_dump($data);
         $response->getBody()->write('<img src="https://sun9-21.userapi.com/impf/y2DXEIn3kevJGSUiPZ_r_BFNbrgmkCgZ_5LewA/yqlhPratQxY.jpg?size=1280x718&quality=96&sign=4346a6b52783a0c84c220dbb8d02846a&type=album" width=50% height=50%>');
         return $response;
