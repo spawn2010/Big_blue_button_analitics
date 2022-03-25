@@ -24,7 +24,7 @@ class Adapter
 
         foreach ($reflect->getProperties() as $reflectProperty) {
             $name = $reflectProperty->getName();
-            if (in_array($name, $this->excludeProperties)) {
+            if (in_array($name, $this->excludeProperties, true)) {
                 continue;
             }
 
