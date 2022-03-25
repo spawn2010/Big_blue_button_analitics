@@ -5,9 +5,9 @@ namespace App\Service;
 use App\Dao\AttendeeDao;
 use App\Dao\LogDao;
 use App\Dao\MeetingDao;
-use App\Exception\NotFoundAttendeeByIdException;
+use App\Exception\NotFoundAttendeeException;
 use App\Exception\NotFoundMeetingCollectionException;
-use App\Exception\NotFoundMeetingByIdException;
+use App\Exception\NotFoundMeetingException;
 use Doctrine\DBAL\Exception;
 
 class ReadService
@@ -46,7 +46,7 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundMeetingByIdException
+     * @throws NotFoundMeetingException
      */
     public function getAllMeetingsInfo(): array
     {
@@ -70,7 +70,7 @@ class ReadService
                'meeting' => $meeting,
                'moderators' => $moderators,
            ];
-       } catch (NotFoundMeetingByIdException $exception){
+       } catch (NotFoundMeetingException $exception){
            echo "Конференции с id = $id не существует";
        }
     }
@@ -88,9 +88,9 @@ class ReadService
                 'user' => $user,
                 'meetings' => $meetings
             ];
-        } catch (NotFoundAttendeeByIdException $e){
+        } catch (NotFoundAttendeeException $e){
             echo "Пользователя с id = $id не существует";
-        } catch (NotFoundMeetingByIdException $e){
+        } catch (NotFoundMeetingException $e){
             echo "Пользователь с id = $id не участвовал в конференциях";
         }
     }
@@ -110,7 +110,7 @@ class ReadService
     {
             $result = $this->meetingDao->getById($id);
             if (!$result){
-                throw new NotFoundMeetingByIdException();
+                throw new NotFoundMeetingException();
             }
 
         return $result;
@@ -118,13 +118,13 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundAttendeeByIdException
+     * @throws NotFoundAttendeeException
      */
     public function getAttendeeById($id): array
     {
         $result = $this->attendeeDao->getById($id);
         if (!$result){
-            throw new NotFoundAttendeeByIdException();
+            throw new NotFoundAttendeeException();
         }
         return $result;
     }
@@ -170,14 +170,14 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundMeetingByIdException
+     * @throws NotFoundMeetingException
      */
     public function getModerators($internalMeetingId): array
     {
             $moderators = [];
             $meeting =  $this->logDao->getByInternalMeetingId($internalMeetingId);
             if (!$meeting){
-                throw new NotFoundMeetingByIdException();
+                throw new NotFoundMeetingException();
             }
             foreach ($meeting as $item){
                 $user = $this->attendeeDao->getByInternalId($item['userId']);
@@ -190,22 +190,23 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundMeetingByIdException
-     * @throws NotFoundAttendeeByIdException
+     * @throws NotFoundMeetingException
+     * @throws NotFoundAttendeeException
      */
     public function getMeetingsByAttendee($attendeeInternalId): ?array
     {
             $meetings = [];
             $user = $this->logDao->getByUserId($attendeeInternalId);
             if(!$user){
-                throw new NotFoundAttendeeByIdException();
+                throw new NotFoundAttendeeException();
             }
             foreach ($user as $item){
-                $meetings = $this->meetingDao->getByInternalMeetingId($item['meetingId']);
+                $meetings[] = $this->meetingDao->getByInternalMeetingId($item['meetingId']);
             }
             if(!$meetings){
-                throw new NotFoundMeetingByIdException();
+                throw new NotFoundMeetingException();
             }
+
             return $meetings;
     }
 
