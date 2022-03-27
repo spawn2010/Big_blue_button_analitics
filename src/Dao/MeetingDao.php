@@ -119,10 +119,12 @@ class MeetingDao
      */
     public function getCollectionByParam($params): array
     {
+        $params = implode('=', array_values($params));
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('meetings')
             ->where($params)
+            ->orderBy('duration')
             ->fetchAllAssociative();
     }
 }

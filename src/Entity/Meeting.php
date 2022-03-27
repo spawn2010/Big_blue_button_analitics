@@ -57,7 +57,7 @@ class Meeting
 
     public function setStartTime($startTime)
     {
-        $this->startTime = $startTime;
+        $this->startTime = intval($startTime);
     }
 
     public function getCreationDate()
@@ -87,7 +87,7 @@ class Meeting
 
     public function setCreationTime($creationTime)
     {
-        $this->creationTime = $creationTime;
+        $this->creationTime = intval($creationTime);
     }
 
     public function getEndTime()
@@ -97,7 +97,7 @@ class Meeting
 
     public function setEndTime($endTime)
     {
-        $this->endTime = $endTime;
+        $this->endTime = intval($endTime);
     }
 
     public function getDuration()
