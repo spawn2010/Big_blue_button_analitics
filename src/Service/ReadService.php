@@ -25,6 +25,7 @@ class ReadService
 
     /**
      * @throws Exception
+     * @throws NotFoundMeetingCollectionException
      */
     public function getMeetingsInfoByParam($params)
     {
@@ -56,6 +57,7 @@ class ReadService
 
     /**
      * @throws Exception
+     * @throws NotFoundMeetingException
      */
     public function getMeetingInfoById($id)
     {
@@ -69,6 +71,8 @@ class ReadService
 
     /**
      * @throws Exception
+     * @throws NotFoundAttendeeException
+     * @throws NotFoundMeetingException
      */
     public function getAttendeeInfoById($id)
     {
@@ -129,10 +133,6 @@ class ReadService
         return $result;
     }
 
-    /**
-     * @throws Exception
-     * @throws NotFoundMeetingCollectionException
-     */
     public function getMedianDurationByMeetingsParam($meetings)
     {
         $medianDuration = (count($meetings) + 1) / 2;
