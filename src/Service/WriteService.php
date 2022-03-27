@@ -43,7 +43,7 @@ class WriteService
                 }
 
                 if ((!$this->logDao->getByInternalMeetingId($meetingFromApi->getInternalMeetingId())) || (!$this->logDao->getByUserId($attendeeFromApi->getUserId()))) {
-                    $this->logDao->insert($attendee,$meeting);
+                    $this->logDao->insert($attendee, $meeting);
                 }
             }
 

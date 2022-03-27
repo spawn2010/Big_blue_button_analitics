@@ -12,6 +12,7 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Slim\Flash\Messages;
 
 
 return function (ContainerBuilder $containerBuilder) {
@@ -49,7 +50,10 @@ return function (ContainerBuilder $containerBuilder) {
         \App\Dao\MeetingDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
         \App\Dao\AttendeeDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
         \App\Dao\LogDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),
-
+        Messages::class => DI\factory(function () {
+            $storage = [];
+            return new Messages($storage);
+        }),
     ]);
 
 };

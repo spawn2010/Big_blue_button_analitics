@@ -28,20 +28,16 @@ class ReadService
      */
     public function getMeetingsInfoByParam($params)
     {
-        try {
-            $meetings = $this->getMeetingsByParam($params);
-            $countMeetings = count($meetings);
-            $countAttendees = $this->getMaxUsersByMeetings($meetings);
-            $medianDuration = $this->getMedianDurationByMeetingsParam($meetings);
-            return [
-                'meetings' => $meetings,
-                'countMeetings' => $countMeetings,
-                'countAttendees' => $countAttendees,
-                'medianDuration' => $medianDuration
-            ];
-        } catch (NotFoundMeetingCollectionException $e) {
-            echo 'Конференции не найдены';
-        }
+        $meetings = $this->getMeetingsByParam($params);
+        $countMeetings = count($meetings);
+        $countAttendees = $this->getMaxUsersByMeetings($meetings);
+        $medianDuration = $this->getMedianDurationByMeetingsParam($meetings);
+        return [
+            'meetings' => $meetings,
+            'countMeetings' => $countMeetings,
+            'countAttendees' => $countAttendees,
+            'medianDuration' => $medianDuration
+        ];
     }
 
     /**
@@ -63,16 +59,12 @@ class ReadService
      */
     public function getMeetingInfoById($id)
     {
-        try {
-            $meeting = $this->getMeetingById($id);
-            $moderators = $this->getModerators($meeting['internalMeetingId']);
-            return [
-                'meeting' => $meeting,
-                'moderators' => $moderators,
-            ];
-        } catch (NotFoundMeetingException $exception) {
-            echo "Конференции с id = $id не существует";
-        }
+        $meeting = $this->getMeetingById($id);
+        $moderators = $this->getModerators($meeting['internalMeetingId']);
+        return [
+            'meeting' => $meeting,
+            'moderators' => $moderators,
+        ];
     }
 
     /**
@@ -80,19 +72,13 @@ class ReadService
      */
     public function getAttendeeInfoById($id)
     {
-        try {
-            $user = $this->getAttendeeById($id);
-            $meetings = $this->getMeetingsByAttendee($user['internalId']);
+        $user = $this->getAttendeeById($id);
+        $meetings = $this->getMeetingsByAttendee($user['internalId']);
 
-            return [
-                'user' => $user,
-                'meetings' => $meetings
-            ];
-        } catch (NotFoundAttendeeException $e) {
-            echo "Пользователя с id = $id не существует";
-        } catch (NotFoundMeetingException $e) {
-            echo "Пользователь с id = $id не участвовал в конференциях";
-        }
+        return [
+            'user' => $user,
+            'meetings' => $meetings
+        ];
     }
 
     /**
