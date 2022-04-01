@@ -25,12 +25,8 @@ class MeetingAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        try {
-            $data = $this->readService->getMeetingInfoById($args['id']);
-        } catch (NotFoundMeetingException $exception) {
-            $this->flash->addMessage('meeting', 'Конференция с id =' . $args['id'] . 'не найдена');
-        }
-
+        $data = $this->readService->getMeetingInfoById($args['id']);
+        var_dump($data);
         $response->getBody()->write('<img src="https://sun9-37.userapi.com/impf/SwgPsjdv9bds0ITqhjwBfLhtYABsLTiYX1MUeg/s9amfU-JbnI.jpg?size=1280x718&quality=96&sign=5bc34071fb36e54ac6f786b77d5cf1bf&type=album" width=50% height=50%>');
         return $response;
     }

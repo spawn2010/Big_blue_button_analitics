@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use App\Exception\BaseException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Flash\Messages;
 
-class SessionMiddleware implements Middleware
+
+class ExceptionMiddleware implements Middleware
 {
-    /**
-     * {@inheritdoc}
-     */
 
     private Messages $flash;
 
@@ -25,13 +24,11 @@ class SessionMiddleware implements Middleware
 
     public function process(Request $request, RequestHandler $handler): Response
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
+        try {
+            return $handler->handle($request);
+        }catch (BaseException $e){
+            var_dump($e->getException());
+            return $handler->handle($request);
         }
-
-        // Change flash message storage
-        $this->flash->__construct($_SESSION);
-
-        return $handler->handle($request);
     }
 }
