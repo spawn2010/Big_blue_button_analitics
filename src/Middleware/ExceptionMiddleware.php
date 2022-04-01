@@ -26,7 +26,7 @@ class ExceptionMiddleware implements Middleware
     {
         try {
             return $handler->handle($request);
-        }catch (BaseException $e){
+        } catch (BaseException $e) {
             var_dump($e->getException());
             return $handler->handle($request);
         }

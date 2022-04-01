@@ -6,7 +6,8 @@ class BaseException extends \Exception
 {
     public $exceptionName;
 
-    public function getException(){
+    public function getException()
+    {
         return $this->exceptionName;
     }
 }
