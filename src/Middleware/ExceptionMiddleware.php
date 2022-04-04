@@ -28,7 +28,7 @@ class ExceptionMiddleware implements Middleware
             return $handler->handle($request);
         } catch (BaseException $e) {
             var_dump($e->getException());
-            return $handler->handle($request);
+            return  new \Slim\Psr7\Response();
         }
     }
 }
