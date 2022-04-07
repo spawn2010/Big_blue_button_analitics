@@ -23,6 +23,7 @@ class WriteService
         $this->meetingDao = $meetingDao;
         $this->attendeeDao = $attendeeDao;
         $this->logDao = $logDao;
+
     }
 
     /**

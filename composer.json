@@ -32,7 +32,8 @@
     "bigbluebutton/bigbluebutton-api-php": "~2.0.0",
     "doctrine/dbal": "4.0.x-dev",
     "devcoder-xyz/php-dotenv": "1.1.1",
-    "slim/flash": "0.4.0"
+    "slim/flash": "0.4.0",
+    "ext-http": "*"
   },
   "require-dev": {
     "jangregor/phpstan-prophecy": "^1.0.0",

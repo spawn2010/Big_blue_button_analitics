@@ -8,6 +8,7 @@ use App\Dao\MeetingDao;
 use App\Exception\NotFoundAttendeeException;
 use App\Exception\NotFoundMeetingCollectionException;
 use App\Exception\NotFoundMeetingException;
+use App\Exception\NotFoundModeratorException;
 use Doctrine\DBAL\Exception;
 
 class ReadService
@@ -151,6 +152,7 @@ class ReadService
     /**
      * @throws Exception
      * @throws NotFoundMeetingException
+     * @throws NotFoundModeratorException
      */
     public function getModerators($internalMeetingId): array
     {
@@ -165,6 +167,11 @@ class ReadService
                 $moderators[] = $user;
             }
         }
+
+        if (!$moderators) {
+            throw new NotFoundModeratorException();
+        }
+
         return $moderators;
     }
 
