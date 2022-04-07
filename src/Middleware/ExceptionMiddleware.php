@@ -32,19 +32,9 @@ class ExceptionMiddleware implements Middleware
         $response = new \Slim\Psr7\Response();
         try {
             return $handler->handle($request);
-        } catch (NotFoundAttendeeException $e) {
-            $this->flash->addMessage('error',$e->getException());
-            $response->withHeader('location','/');
-        } catch (NotFoundMeetingCollectionException $e){
-            $this->flash->addMessage('error',$e->getException());
-        } catch (NotFoundMeetingException $e){
-            $this->flash->addMessage('error',$e->getException());
-        } catch (NotFoundModeratorException $e){
-            $this->flash->addMessage('error',$e->getException());
+        } catch (BaseException $e) {
+            $this->flash->addMessage('error', $e->getException());
         }
-        var_dump($response->getHeaders());
-        var_dump($_SESSION);
-        return $response;
-
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 }

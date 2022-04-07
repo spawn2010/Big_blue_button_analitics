@@ -22,6 +22,7 @@ class ListAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $this->readService->getAllMeetingsInfo();
+        var_dump($_SESSION);
         var_dump($data);
         $response->getBody()->write('<img src="https://sun9-52.userapi.com/impf/ApXVwrkaiZw1n39e7ZZQ7ct3R-qVNcdhODf7zw/rAJ6_tuM3sk.jpg?size=1280x722&quality=96&sign=987a6b673bb121dd806c6da71115b6f8&type=album" width=50% height=50%>');
         return $response;

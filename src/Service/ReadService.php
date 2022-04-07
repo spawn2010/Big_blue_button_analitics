@@ -154,7 +154,7 @@ class ReadService
      * @throws NotFoundMeetingException
      * @throws NotFoundModeratorException
      */
-    public function getModerators($internalMeetingId): array
+    public function getModerators($internalMeetingId): ?array
     {
         $moderators = [];
         $meeting = $this->logDao->getByInternalMeetingId($internalMeetingId);
@@ -169,7 +169,7 @@ class ReadService
         }
 
         if (!$moderators) {
-            throw new NotFoundModeratorException();
+            return null;
         }
 
         return $moderators;
