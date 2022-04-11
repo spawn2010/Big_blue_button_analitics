@@ -137,7 +137,7 @@ class ReadService
     public function getMedianDurationByMeetingsParam($meetings)
     {
         $medianDuration = (count($meetings) + 1) / 2;
-        return $meetings[$medianDuration - 1]['duration'];
+        return $meetings[0]['duration'];
     }
 
     public function getMaxUsersByMeetings($meetings)
