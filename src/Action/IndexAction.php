@@ -35,7 +35,7 @@ class IndexAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $this->readService->getMeetingsInfoByParam(['running', '1']);
-        $body = $this->view->render('index.twig',['data' => 'hello world']);
+        $body = $this->view->render('index.twig',['data' => $data,'info' => 'Начальная страница']);
         $response->getBody()->write($body);
         return $response;
     }
