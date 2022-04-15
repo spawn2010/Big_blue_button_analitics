@@ -6,14 +6,20 @@ use App\Service\ReadService;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Flash\Messages;
+use Twig\Environment;
 
 class ListAction
 {
     private ReadService $readService;
+    private Messages $flash;
+    private Environment $view;
 
-    public function __construct(ReadService $readService)
+    public function __construct(ReadService $readService, Messages $flash, Environment $view)
     {
         $this->readService = $readService;
+        $this->flash = $flash;
+        $this->view = $view;
     }
 
     /**
@@ -22,9 +28,8 @@ class ListAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $this->readService->getAllMeetingsInfo();
-        var_dump($_SESSION);
-        var_dump($data);
-        $response->getBody()->write('<img src="https://sun9-52.userapi.com/impf/ApXVwrkaiZw1n39e7ZZQ7ct3R-qVNcdhODf7zw/rAJ6_tuM3sk.jpg?size=1280x722&quality=96&sign=987a6b673bb121dd806c6da71115b6f8&type=album" width=50% height=50%>');
+        $body = $this->view->render('meetings.twig',['data' => $data]);
+        $response->getBody()->write($body);
         return $response;
     }
 }
