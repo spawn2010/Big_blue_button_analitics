@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use _PHPStan_ccec86fc8\Nette\Schema\ValidationException;
 use App\Exception\NotFoundMeetingCollectionException;
 use App\Service\ReadService;
 use Doctrine\DBAL\Exception;

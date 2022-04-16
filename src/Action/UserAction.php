@@ -9,14 +9,19 @@ use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
+use Twig\Environment;
 
 class UserAction
 {
     private ReadService $readService;
+    private Messages $flash;
+    private Environment $view;
 
-    public function __construct(ReadService $readService)
+    public function __construct(ReadService $readService, Messages $flash, Environment $view)
     {
         $this->readService = $readService;
+        $this->flash = $flash;
+        $this->view = $view;
     }
 
     /**
@@ -25,8 +30,8 @@ class UserAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $this->readService->getAttendeeInfoById($args['id']);
-        var_dump($data);
-        $response->getBody()->write('<img src="https://sun9-36.userapi.com/impf/w9BTOq2jyEsmuDt79UZyXhug35P7gYvnEN8LsA/RYuzWAk2fwo.jpg?size=1280x717&quality=96&sign=eb220a7814e1daab7971cc510a0cd8a7&type=album" width=50% height=50%>');
+        $body = $this->view->render('user.twig',['data' => $data]);
+        $response->getBody()->write($body);
         return $response;
     }
 }

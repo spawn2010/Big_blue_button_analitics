@@ -41,7 +41,7 @@
                     <tr>
                         <th scope="row">
                             {% if item.moderators %}
-                                {{ item.moderators[0] }}
+                                <a href="/user/{{ item.moderators[0].id }}" class="font-weight-bold text-dark" role="button" aria-pressed="true"> {{ item.moderators[0].fullName }}</a>
                             {% else %}
                                 <span>Модератор отсуствует</span>
                             {% endif %}

@@ -1,0 +1,43 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col border border-dark bg-light p-4 font-weight-bold ">Конференция : {{ data.meeting.meetingName }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">ID конференции</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.meetingId }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4 ">Внутренний ID конференции</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.internalMeetingId }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4 ">Время начала</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.startTime }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4 ">Время окончания</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.endTime }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">Дата создания</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.createDate }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">Статус</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.running }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">Продолжительность</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.duration }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">Количество участников</div>
+            <div class="col border border-dark text-center p-4">{{ data.meeting.maxUsers }}</div>
+            <div class="w-100"></div>
+            <div class="col border border-dark text-center p-4">Модератор</div>
+            <div class="col border border-dark text-center p-4">
+                {% if data.moderators %}
+                    {{ data.moderators[0].fullName }}
+                {% else %}
+                    <span>Модератор отсуствует</span>
+                {% endif %}
+            </div>
+            <div class="w-100"></div>
+        </div>
+    </div>
+{% endblock %}
