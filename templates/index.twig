@@ -1,41 +1,25 @@
-{% extends 'base.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webpack</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Webpack Course Content</h1>
+  </div>
+<div class="logo"></div>
+<hr>
+<pre></pre>
+  <div data-controller="hello">
+      <input data-hello-target="name" type="text">
 
-{% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col border border-dark text-secondary p-3 ">Количество конференций - {{ data.countMeetings }}</div>
-            <div class="col border border-dark text-secondary p-3 ">Количество участников - {{ data.countAttendees }}</div>
-            <div class="col border border-dark text-secondary p-3 ">Средняя длительность - {{ data.medianDuration }}</div>
-            <div class="col border border-dark p-3 bg-light text-secondary">График конференций</div>
-            <div class="w-100"></div>
-            <div class="text-center w-100">
-                <img src="https://sun9-12.userapi.com/impf/jI39N4ztXtvKTwWKyZy7M34ZX4fotTXYO426fw/Wt-x-RjhpqE.jpg?size=2235x489&quality=96&sign=a56703b5994675f5f9039172590b9c87&type=album" class="img-fluid" alt="Responsive image">
-            </div>
-            <div class="w-100"></div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Название конференции</th>
-                    <th scope="col">Начало конференции</th>
-                    <th scope="col">Количество участников</th>
-                    <th scope="col">Длительность</th>
-                    <th scope="col">Подробности</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in data.meetings %}
-                    <tr>
-                        <th scope="row">{{ item.meetingName }}</th>
-                        <td>{{ item.startTime }}</td>
-                        <td>{{ item.maxUsers }}</td>
-                        <td>{{ item.duration }}</td>
-                        <td>
-                            <a href="/meetings/{{ item.id }}" class="btn btn-secondary active" role="button" aria-pressed="true">Подробнее</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-{% endblock %}
+      <button data-action="click->hello#greet">
+          Greet
+      </button>
+
+      <span data-hello-target="output">
+  </span>
+  </div>
+</body>
+</html>

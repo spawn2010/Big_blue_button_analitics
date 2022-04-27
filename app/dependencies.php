@@ -55,7 +55,7 @@ return function (ContainerBuilder $containerBuilder) {
             return new Messages($storage);
         }),
         \Twig\Environment::class => DI\factory(function () {
-            $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates');
+            $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/public/templates');
             return new \Twig\Environment($loader);
         }),
     ]);

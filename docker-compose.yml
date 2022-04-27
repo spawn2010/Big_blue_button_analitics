@@ -18,7 +18,6 @@ services:
     volumes:
       - .:/var/www
       - logs:/var/www/logs
-      - ./templates:/var/www/public
 
   db:
     image: mysql:latest

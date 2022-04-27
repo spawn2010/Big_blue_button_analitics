@@ -3,14 +3,15 @@ const HTMLWebpackPlugin =  require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
-    context: path.resolve(__dirname,'public/templates'),
+    context: path.resolve(__dirname,'templates'),
     mode: "development",
     entry: {
         main: '/index.js'
     },
     output: {
         filename: "[name].[contenthash].js",
-        path: path.resolve(__dirname,'templates')
+        path: path.resolve(__dirname,'public/templates'),
+        publicPath: "templates/"
     },
     resolve: {
         extensions: ['.js','.json','.png'],
@@ -22,7 +23,10 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: "/index.html"
+           // filename: "index.html",
+           // template: "/index.html",
+            filename: "index.twig",
+           template: "/index.twig"
         }),
         new CleanWebpackPlugin()
     ],
@@ -40,18 +44,7 @@ module.exports = {
                 test: /\.xml$/,
                 use: ['xml-loader']
             },
-            {
-                test: /\.js$/,
-                include: path.resolve(__dirname, './templates'),
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'webfonts',
-                        publicPath: '../webfonts',
-                    },
-                }
-            },
+
         ]
     }
 }
