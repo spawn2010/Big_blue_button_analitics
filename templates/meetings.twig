@@ -1,0 +1,61 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="w-100 row border border-dark m-0">
+                <div class="col-1 text-secondary p-3 font-weight-bold">Сортировка по</div>
+                <div class="col-1 text-secondary p-2 font-weight-bold">
+                    <div class="btn-group">
+                        <button type="button" class="btn w-100">Action</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split w-100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 text-secondary p-3 font-weight-bold">Показывать с</div>
+                <div class="col-1 text-secondary p-3 ">14.04.2022</div>
+                <div class="col-1 text-secondary p-3 font-weight-bold">по</div>
+                <div class="col-1 text-secondary p-3">15.04.2022</div>
+            </div>
+            <div class="w-100"></div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Модератор</th>
+                    <th scope="col">Начало конференции</th>
+                    <th scope="col">Количество участников</th>
+                    <th scope="col">Длительность</th>
+                    <th scope="col">Подробности</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr>
+                        <th scope="row">
+                            {% if item.moderators %}
+                                <a href="/user/{{ item.moderators[0].id }}" class="font-weight-bold text-dark" role="button" aria-pressed="true"> {{ item.moderators[0].fullName }}</a>
+                            {% else %}
+                                <span>Модератор отсуствует</span>
+                            {% endif %}
+                        </th>
+                        <td>{{ item.startTime }}</td>
+                        <td>{{ item.maxUsers }}</td>
+                        <td>{{ item.duration }}</td>
+                        <td>
+                            <a href="/meetings/{{ item.id }}" class="btn btn-secondary active" role="button" aria-pressed="true">Подробнее</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

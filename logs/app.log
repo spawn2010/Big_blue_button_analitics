@@ -1,0 +1,24 @@
+[2022-03-14T12:36:44.095566+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"4b96a15"}
+[2022-03-14T12:36:49.847489+00:00] slim-app.INFO: User of id `2` was viewed. [] {"uid":"1cd788a"}
+[2022-03-14T12:37:19.681838+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"bc3b580"}
+[2022-03-14T12:37:50.938603+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"85ddf8b"}
+[2022-03-14T12:38:13.516686+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"82d18d2"}
+[2022-03-14T12:39:35.386552+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"8c45f4e"}
+[2022-03-14T12:39:43.152397+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"91ad6c2"}
+[2022-03-14T12:40:14.442174+00:00] slim-app.INFO: User of id `2` was viewed. [] {"uid":"0c9fdfe"}
+[2022-03-14T12:40:17.808039+00:00] slim-app.INFO: User of id `2` was viewed. [] {"uid":"cc7090f"}
+[2022-03-14T12:47:07.211195+00:00] slim-app.INFO: User of id `2` was viewed. [] {"uid":"5128dd6"}
+[2022-03-14T12:52:07.519328+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"58dba7f"}
+[2022-03-14T12:52:47.067912+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"5706915"}
+[2022-03-14T12:54:10.897894+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"0a9cf02"}
+[2022-03-14T12:54:18.820900+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"adb0a2b"}
+[2022-03-14T12:58:42.625580+00:00] slim-app.ERROR: 405 Method Not Allowed  [] {"uid":"7022b21"}
+[2022-03-14T12:59:01.801141+00:00] slim-app.ERROR: 405 Method Not Allowed Type: Slim\Exception\HttpMethodNotAllowedException Code: 405 Message: Method not allowed. Must be one of: OPTIONS File: /var/www/vendor/slim/slim/Slim/Middleware/RoutingMiddleware.php Line: 94 Trace: #0 /var/www/vendor/slim/slim/Slim/Middleware/RoutingMiddleware.php(58): Slim\Middleware\RoutingMiddleware->performRouting(Object(Slim\Psr7\Request)) #1 /var/www/vendor/slim/slim/Slim/MiddlewareDispatcher.php(147): Slim\Middleware\RoutingMiddleware->process(Object(Slim\Psr7\Request), Object(Psr\Http\Server\RequestHandlerInterface@anonymous)) #2 /var/www/vendor/slim/slim/Slim/Middleware/BodyParsingMiddleware.php(68): Psr\Http\Server\RequestHandlerInterface@anonymous->handle(Object(Slim\Psr7\Request)) #3 /var/www/vendor/slim/slim/Slim/MiddlewareDispatcher.php(147): Slim\Middleware\BodyParsingMiddleware->process(Object(Slim\Psr7\Request), Object(Psr\Http\Server\RequestHandlerInterface@anonymous)) #4 /var/www/vendor/slim/slim/Slim/Middleware/ErrorMiddleware.php(107): Psr\Http\Server\RequestHandlerInterface@anonymous->handle(Object(Slim\Psr7\Request)) #5 /var/www/vendor/slim/slim/Slim/MiddlewareDispatcher.php(147): Slim\Middleware\ErrorMiddleware->process(Object(Slim\Psr7\Request), Object(Psr\Http\Server\RequestHandlerInterface@anonymous)) #6 /var/www/vendor/slim/slim/Slim/MiddlewareDispatcher.php(81): Psr\Http\Server\RequestHandlerInterface@anonymous->handle(Object(Slim\Psr7\Request)) #7 /var/www/vendor/slim/slim/Slim/App.php(215): Slim\MiddlewareDispatcher->handle(Object(Slim\Psr7\Request)) #8 /var/www/public/index.php(80): Slim\App->handle(Object(Slim\Psr7\Request)) #9 {main} [] {"uid":"8a5d433"}
+[2022-03-14T12:59:15.959913+00:00] slim-app.ERROR: 405 Method Not Allowed  [] {"uid":"c5d1938"}
+[2022-03-14T13:11:36.830022+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"5a2d91b"}
+[2022-03-14T13:11:53.474248+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"83dde30"}
+[2022-03-14T13:12:02.962868+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"d922a71"}
+[2022-03-14T13:12:03.681873+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"7c09f3c"}
+[2022-03-14T13:12:03.990469+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"5af525e"}
+[2022-03-14T13:12:04.426466+00:00] slim-app.ERROR: Slim Application Error  [] {"uid":"ff9964e"}
+[2022-03-14T13:20:44.704122+00:00] slim-app.ERROR: 404 Not Found  [] {"uid":"fd86dfe"}
