@@ -6,7 +6,6 @@ use App\Dao\AttendeeDao;
 use App\Dao\LogDao;
 use App\Dao\MeetingDao;
 use App\Exception\NotFoundAttendeeException;
-use App\Exception\NotFoundMeetingCollectionException;
 use App\Exception\NotFoundMeetingException;
 use App\Exception\NotFoundModeratorException;
 use Doctrine\DBAL\Exception;
@@ -26,7 +25,6 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundMeetingCollectionException
      */
     public function getMeetingsInfoByParam($params)
     {
@@ -122,22 +120,16 @@ class ReadService
 
     /**
      * @throws Exception
-     * @throws NotFoundMeetingCollectionException
      */
     public function getMeetingsByParam($params): array
     {
-        $result = $this->meetingDao->getCollectionByParam($params);
-        if (!$result) {
-            throw new NotFoundMeetingCollectionException();
-        }
-
-        return $result;
+        return $this->meetingDao->getCollectionByParam($params);
     }
 
     public function getMedianDurationByMeetingsParam($meetings)
     {
         $medianDuration = (count($meetings) + 1) / 2;
-        return $meetings[0]['duration'];
+        return $medianDuration;
     }
 
     public function getMaxUsersByMeetings($meetings)

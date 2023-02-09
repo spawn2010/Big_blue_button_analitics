@@ -17,7 +17,7 @@ class LogDao
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function insert(Attendee $attendee, Meeting $meeting): void
     {
@@ -34,7 +34,7 @@ class LogDao
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
-            throw new Exception((string)$e);
+            throw new \Exception((string)$e);
         }
     }
 

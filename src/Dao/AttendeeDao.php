@@ -16,7 +16,7 @@ class AttendeeDao
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function insert(Attendee $attendee): void
     {
@@ -35,7 +35,7 @@ class AttendeeDao
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
-            throw new Exception((string)$e);
+            throw new \Exception((string)$e);
         }
     }
 

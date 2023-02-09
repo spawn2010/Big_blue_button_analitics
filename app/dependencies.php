@@ -14,7 +14,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 
-
+/**
+ * * @throws Exception
+ */
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         LoggerInterface::class => function (ContainerInterface $c) {
@@ -44,7 +46,7 @@ return function (ContainerBuilder $containerBuilder) {
                     'driver' => getenv('DATABASE_DRIVER'),
                 ]);
             } catch (\Doctrine\DBAL\Exception $e) {
-                throw new \Doctrine\DBAL\Exception((string)$e);
+                throw new Exception((string)$e);
             }
         }),
         \App\Dao\MeetingDao::class => \DI\autowire()->constructorParameter('connection',\DI\get(Connection::class)),

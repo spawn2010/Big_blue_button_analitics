@@ -16,7 +16,7 @@ class MeetingDao
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function update(Meeting $meeting): void
     {
@@ -37,12 +37,12 @@ class MeetingDao
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
-            throw new Exception((string)$e);
+            throw new \Exception((string)$e);
         }
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function insert(Meeting $meeting): void
     {
@@ -75,7 +75,7 @@ class MeetingDao
                 ])
                 ->executeQuery();
         } catch (Exception $e) {
-            throw new Exception((string)$e);
+            throw new \Exception((string)$e);
         }
     }
 
@@ -120,6 +120,7 @@ class MeetingDao
     public function getCollectionByParam($params): array
     {
         $params = implode('=', array_values($params));
+
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('meetings')

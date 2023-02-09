@@ -6,7 +6,6 @@ namespace App\Middleware;
 
 use App\Exception\BaseException;
 use App\Exception\NotFoundAttendeeException;
-use App\Exception\NotFoundMeetingCollectionException;
 use App\Exception\NotFoundMeetingException;
 use App\Exception\NotFoundModeratorException;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -33,8 +32,8 @@ class ExceptionMiddleware implements Middleware
         try {
             return $handler->handle($request);
         } catch (BaseException $e) {
-            $this->flash->addMessage('error', $e->getException());
+            var_dump($e->getException());
         }
-        return $response->withHeader('Location', '/')->withStatus(302);
+        return $response->withHeader('Location', '/');
     }
 }
