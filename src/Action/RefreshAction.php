@@ -22,7 +22,7 @@ class RefreshAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $this->writeService->refresh();
-        $response->getBody()->write('данный Action будет взаимодействовать с WriteService');
-        return $response;
+
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 }
