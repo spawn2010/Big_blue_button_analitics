@@ -19,7 +19,13 @@ class WriteService
 
     public function __construct(BigBlueButton $meetings, MeetingDao $meetingDao, AttendeeDao $attendeeDao, LogDao $logDao)
     {
-        $this->meetings = $meetings->getMeetings()->getMeetings();
+        if (getenv('API_BASEURL') == 'yor_base_bigbluebutton_url'){
+            $xml = simplexml_load_string(file_get_contents(dirname(__DIR__) . '/../tests/fixtures/get_meeting_info.xml'));
+            $this->meetings = [(new \BigBlueButton\Responses\GetMeetingInfoResponse($xml))->getMeeting()];
+        }else{
+            $this->meetings = $meetings->getMeetings()->getMeetings();
+        }
+
         $this->meetingDao = $meetingDao;
         $this->attendeeDao = $attendeeDao;
         $this->logDao = $logDao;
